@@ -1,7 +1,11 @@
 name: Poll telegram bot on new messages
 on:
   schedule:
-    - cron: "5 * * * *"
+    - cron: "*/5 * * * *"
+  repository_dispatch:
+    types:
+      - "on-demand-deploy"
+
 jobs:
   start_poll_job:
     runs-on: ubuntu-latest
