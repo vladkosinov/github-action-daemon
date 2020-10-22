@@ -15,6 +15,8 @@ async function main() {
     run_id: GITHUB_RUN_ID,
   });
 
+  console.log("currentRun", currentRun);
+
   const {
     data: { workflow_runs: runsInProgress },
   } = await github.actions.listWorkflowRuns({
@@ -24,9 +26,13 @@ async function main() {
     status: "in_progress",
   });
 
+  console.log("runsInProgress", runsInProgress);
+
   const concurrentRuns = runsInProgress.filter(
     ({ id }) => id !== GITHUB_RUN_ID
   );
+
+  console.log("concurrentRuns", concurrentRuns);
 
   if (!concurrentRuns.length) {
     return;
@@ -36,11 +42,13 @@ async function main() {
     (run) => new Date(run.created_at) > new Date(currentRun.created_at)
   );
 
+  console.log("fresherRun", fresherRun);
+
   if (fresherRun) {
     core.setFailed(`There's already a newer task running: ${fresherRun.id}`);
   }
 
-  await Promise.all(
+  const cancelledRuns = await Promise.all(
     concurrentRuns.map((run) =>
       github.actions.cancelWorkflowRun({
         owner: OWNER,
@@ -49,6 +57,8 @@ async function main() {
       })
     )
   );
+
+  console.log("cancelledRuns", cancelledRuns);
 }
 
 function handleError(err) {
