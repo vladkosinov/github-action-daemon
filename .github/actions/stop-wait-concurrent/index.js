@@ -29,7 +29,7 @@ async function main() {
   console.log("runsInProgress", runsInProgress);
 
   const concurrentRuns = runsInProgress.filter(
-    ({ id }) => id !== GITHUB_RUN_ID
+    ({ id }) => id !== parseInt(GITHUB_RUN_ID, 10)
   );
 
   console.log("concurrentRuns", concurrentRuns);
