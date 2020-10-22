@@ -33,7 +33,9 @@ jobs:
         run: yarn
 
       - uses: ./.github/actions/stop-wait-concurrent
-        with:
+        env:
+          OWNER: ${{ github.event.repository.owner.login }}
+          REPO: ${{ github.event.repository.name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Start bot

@@ -5,8 +5,7 @@ process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
 async function main() {
-  const token = core.getInput("GITHUB_TOKEN");
-  const github = getOctokit(token);
+  const github = getOctokit(process.env.GITHUB_TOKEN);
 
   const { data: currentRun } = await github.actions.getWorkflowRun({
     owner: process.env.OWNER,
