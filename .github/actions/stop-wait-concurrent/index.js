@@ -4,20 +4,22 @@ const { getOctokit } = require("@actions/github");
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
+const { GITHUB_RUN_ID, OWNER, REPO, GITHUB_TOKEN } = process.env;
+
 async function main() {
-  const github = getOctokit(process.env.GITHUB_TOKEN);
+  const github = getOctokit(GITHUB_TOKEN);
 
   const { data: currentRun } = await github.actions.getWorkflowRun({
-    owner: process.env.OWNER,
-    repo: process.env.REPO,
-    run_id: process.env.GITHUB_RUN_ID,
+    owner: OWNER,
+    repo: REPO,
+    run_id: GITHUB_RUN_ID,
   });
 
   const {
     data: { workflow_runs: runsInProgress },
   } = await github.actions.listWorkflowRuns({
-    owner: process.env.OWNER,
-    repo: process.env.REPO,
+    owner: OWNER,
+    repo: REPO,
     workflow_id: currentRun.workflow_id,
     status: "in_progress",
   });
@@ -41,8 +43,8 @@ async function main() {
   await Promise.all(
     concurrentRuns.map((run) =>
       github.actions.cancelWorkflowRun({
-        owner: process.env.OWNER,
-        repo: process.env.REPO,
+        owner: OWNER,
+        repo: REPO,
         run_id: run.id,
       })
     )
