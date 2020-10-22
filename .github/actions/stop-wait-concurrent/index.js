@@ -4,9 +4,9 @@ const { getOctokit } = require("@actions/github");
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
-const { GITHUB_RUN_ID, OWNER, REPO, GITHUB_TOKEN } = process.env;
-
 async function main() {
+  const { GITHUB_RUN_ID, OWNER, REPO, GITHUB_TOKEN } = process.env;
+
   const github = getOctokit(GITHUB_TOKEN);
 
   const { data: currentRun } = await github.actions.getWorkflowRun({
