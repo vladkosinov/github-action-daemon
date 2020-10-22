@@ -1,0 +1,12 @@
+{
+  "name": "telegram-web",
+  "private": true,
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "telegraf": "^3.38.0"
+  },
+  "scripts": {
+    "start": "node ./index.js"
+  }
+}
