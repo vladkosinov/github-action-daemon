@@ -1,5 +1,8 @@
 name: Poll telegram bot on new messages
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "*/5 * * * *"
   repository_dispatch:
