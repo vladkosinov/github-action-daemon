@@ -5,21 +5,22 @@ process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
 async function main() {
-  const { GITHUB_RUN_ID, OWNER, REPO, GITHUB_TOKEN } = process.env;
+  const { GITHUB_RUN_ID, GITHUB_REPOSITORY, GITHUB_TOKEN } = process.env;
+  const [owner, repo] = GITHUB_REPOSITORY.split("/");
 
   const github = getOctokit(GITHUB_TOKEN);
 
   const { data: currentRun } = await github.actions.getWorkflowRun({
-    owner: OWNER,
-    repo: REPO,
+    owner,
+    repo,
     run_id: GITHUB_RUN_ID,
   });
 
   const {
     data: { workflow_runs: runsInProgress },
   } = await github.actions.listWorkflowRuns({
-    owner: OWNER,
-    repo: REPO,
+    owner,
+    repo,
     workflow_id: currentRun.workflow_id,
     status: "in_progress",
   });
@@ -43,8 +44,8 @@ async function main() {
   const cancelledRuns = await Promise.all(
     concurrentRuns.map((run) =>
       github.actions.cancelWorkflowRun({
-        owner: OWNER,
-        repo: REPO,
+        owner,
+        repo,
         run_id: run.id,
       })
     )
