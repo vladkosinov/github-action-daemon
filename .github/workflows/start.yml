@@ -31,7 +31,7 @@ jobs:
           TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          timeout --preserve-status $TIMEOUT yarn start
+          timeout --preserve-status $TIMEOUT node ./index.js
 
       - name: Restart
         if: ${{ success() }}
