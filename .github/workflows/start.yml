@@ -31,7 +31,7 @@ jobs:
           TIMEOUT: 1h
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          timeout --preserve-status $TIMEOUT npm start
+          timeout --preserve-status $TIMEOUT node ./index.js
 
       - name: Restart
         if: ${{ success() }}
