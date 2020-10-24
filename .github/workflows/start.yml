@@ -30,7 +30,7 @@ jobs:
         env:
           TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: timeout $TIMEOUT yarn start
+        run: (timeout $TIMEOUT yarn start; exit 0)
 
       - uses: actions/github-script@v2
         with:
