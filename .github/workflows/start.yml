@@ -40,8 +40,8 @@ jobs:
           script: |
             const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-            github.actions.reRunWorkflow({
+            github.actions.createDispatchEvent({
               owner,
               repo,
-              run_id: process.env.GITHUB_RUN_ID,
+              event_type: 'start-on-demand',
             });
