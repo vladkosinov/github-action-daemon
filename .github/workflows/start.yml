@@ -31,9 +31,11 @@ jobs:
           TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          timeout $TIMEOUT yarn start || ( [[ $? -eq 124 ]] && echo "INFO: was successfully stopped" )
+          timeout --preserve-status $TIMEOUT yarn start || ( [[ $? -eq 124 ]] && echo "INFO: was successfully stopped" )
 
-      - uses: actions/github-script@v2
+      - name: Restart
+        if: ${{ success() }}
+        uses: actions/github-script@v2
         with:
           result-encoding: string
           github-token: ${{secrets.PERSONAL_GITHUB_TOKEN}}
