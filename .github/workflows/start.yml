@@ -31,7 +31,7 @@ jobs:
           TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          timeout --preserve-status $TIMEOUT yarn start || ( [[ $? -eq 124 ]] && echo "INFO: was successfully stopped" )
+          timeout --preserve-status $TIMEOUT yarn start
 
       - name: Restart
         if: ${{ success() }}

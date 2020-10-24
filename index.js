@@ -9,3 +9,8 @@ bot.on("text", async function (ctx) {
 });
 
 bot.launch();
+
+process.on('SIGTERM', () => {
+  console.log('Thanks, bye!');
+  process.exit(0)
+});
