@@ -12,5 +12,5 @@ bot.launch();
 
 process.on('SIGTERM', () => {
   console.log('Thanks, bye!');
-  process.exit(0)
+  // process.exit(0)
 });
