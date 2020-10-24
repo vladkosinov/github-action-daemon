@@ -31,7 +31,7 @@ jobs:
           TIMEOUT: 5m
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          timeout --foreground --preserve-status $TIMEOUT yarn start
+          timeout --preserve-status $TIMEOUT yarn start
 
       - name: Restart
         if: ${{ success() }}
