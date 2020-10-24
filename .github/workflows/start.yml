@@ -38,7 +38,7 @@ jobs:
           result-encoding: string
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const [owner, repo] = GITHUB_REPOSITORY.split("/");
+            const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
             github.actions.reRunWorkflow({
               owner,
