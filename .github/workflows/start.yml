@@ -43,5 +43,5 @@ jobs:
             github.actions.reRunWorkflow({
               owner,
               repo,
-              process.env.GITHUB_RUN_ID,
+              run_id: process.env.GITHUB_RUN_ID,
             });
