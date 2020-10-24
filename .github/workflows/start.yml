@@ -30,14 +30,9 @@ jobs:
         env:
           TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: |
-          timeout $TIMEOUT yarn start
+        run: timeout $TIMEOUT yarn start
 
-      - name: reRun
       - uses: actions/github-script@v2
-        env:
-          OWNER: ${{ github.event.repository.owner.login }}
-          REPO: ${{ github.event.repository.name }}
         with:
           result-encoding: string
           github-token: ${{secrets.GITHUB_TOKEN}}
