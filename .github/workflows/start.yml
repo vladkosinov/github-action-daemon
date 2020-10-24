@@ -1,4 +1,4 @@
-name: Poll telegram bot on new messages
+name: Run the bot
 on:
   push:
     branches:
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/github-script@v2
         with:
           result-encoding: string
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN_PERSONAL}}
           script: |
             const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
