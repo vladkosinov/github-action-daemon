@@ -1,0 +1,51 @@
+name: Poll telegram bot on new messages
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types:
+      - "start-on-demand"
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    name: A job to run bot
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: Run bot
+        env:
+          TIMEOUT: 30
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          timeout $TIMEOUT yarn start
+
+      - name: reRun
+      - uses: actions/github-script@v2
+        env:
+          OWNER: ${{ github.event.repository.owner.login }}
+          REPO: ${{ github.event.repository.name }}
+        with:
+          result-encoding: string
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const [owner, repo] = GITHUB_REPOSITORY.split("/");
+
+            github.actions.reRunWorkflow({
+              owner,
+              repo,
+              process.env.GITHUB_RUN_ID,
+            });
