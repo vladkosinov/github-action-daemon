@@ -28,7 +28,7 @@ jobs:
 
       - name: Run bot
         env:
-          TIMEOUT: 5m
+          TIMEOUT: 30
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
           timeout --preserve-status $TIMEOUT yarn start
