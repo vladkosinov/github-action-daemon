@@ -13,8 +13,10 @@ bot.launch();
 process.on("SIGTERM", () => {
   console.log("Request bot stop", new Date());
 
-  bot.stop(() => {
-    console.log("Stoppped, thanks, bye!", new Date());
-    process.exit(0);
-  });
+  process.exit(0);
+
+  // bot.stop(() => {
+  //   console.log("Stoppped, thanks, bye!", new Date());
+  //   process.exit(0);
+  // });
 });
