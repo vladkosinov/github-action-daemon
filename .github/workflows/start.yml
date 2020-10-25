@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/60 * * * *"
   repository_dispatch:
     types:
       - "start-on-demand"
