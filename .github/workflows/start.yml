@@ -39,6 +39,5 @@ jobs:
           TIMEOUT: 1h
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          node -v
-          ./node_modules/.bin/concurrently --kill-others "node ./poll-and-exit-on-new-run-apper" "node ./index.js"
+        run: /bin/bash -e ./start.sh
+         

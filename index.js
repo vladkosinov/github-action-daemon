@@ -14,7 +14,7 @@ process.on("SIGTERM", () => {
   console.log("Request bot stop", new Date());
   process.exit(2);
 
-  // bot.stop(() => { 
+  // bot.stop(() => {
   //   console.log("Stoppped, thanks, bye!", new Date());
   //   process.exit(0);
   // });
