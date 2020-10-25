@@ -26,7 +26,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: yarn
+        run: npm install
 
       - name: Wait other runs to finish
         env:
