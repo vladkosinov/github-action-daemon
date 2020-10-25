@@ -6,7 +6,7 @@ function handleError(err) {
 }
 
 const { GITHUB_RUN_ID, GITHUB_REPOSITORY, GITHUB_TOKEN } = process.env;
-const { POLL_INTERVAL = 1000 } = process.env;
+const { POLL_INTERVAL = 1000 * 60 } = process.env;
 
 const [owner, repo] = GITHUB_REPOSITORY.split("/");
 const github = getOctokit(GITHUB_TOKEN);
