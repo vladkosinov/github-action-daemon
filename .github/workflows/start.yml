@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "*/5 * * * *"
   repository_dispatch:
     types:
       - "start-on-demand"
@@ -26,24 +28,16 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: yarn
 
+      - name: Wait other runs to finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node ./poll-and-exit-on-other-run-finish.js
+
       - name: Run bot
         env:
           TIMEOUT: 1h
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          timeout --preserve-status $TIMEOUT node ./index.js
-
-      - name: Restart
-        if: ${{ success() }}
-        uses: actions/github-script@v2
-        with:
-          result-encoding: string
-          github-token: ${{secrets.PERSONAL_GITHUB_TOKEN}}
-          script: |
-            const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
-
-            github.repos.createDispatchEvent({
-              owner,
-              repo,
-              event_type: 'start-on-demand',
-            });
+          ./node_modules/.bin/concurrently --kill-others "node ./poll-and-exit-on-new-run-apper" "node ./index.js"
