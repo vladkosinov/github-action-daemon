@@ -11,10 +11,10 @@ bot.on("text", async function (ctx) {
 bot.launch();
 
 process.on("SIGTERM", () => {
-  console.log("Request bot stop");
+  console.log("Request bot stop", new Date());
 
   bot.stop(() => {
-    console.log("Stoppped, thanks, bye!");
+    console.log("Stoppped, thanks, bye!", new Date());
     process.exit(0);
   });
 });
