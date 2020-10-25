@@ -59,6 +59,6 @@ async function main() {
     await slepp();
   }
 }
-
+process.on("SIGTERM", () => process.exit(0));
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
