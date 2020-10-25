@@ -10,7 +10,11 @@ bot.on("text", async function (ctx) {
 
 bot.launch();
 
-process.on('SIGTERM', () => {
-  console.log('Thanks, bye!');
-  process.exit(0)
+process.on("SIGTERM", () => {
+  console.log("Request bot stop");
+
+  bot.stop(() => {
+    console.log("Stoppped, thanks, bye!");
+    process.exit(0);
+  });
 });
