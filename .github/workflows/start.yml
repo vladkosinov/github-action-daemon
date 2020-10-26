@@ -28,16 +28,25 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
 
+      - name: Set ENV variables
+        run: |
+          echo "POLL_INTERVAL_NEW_RUN_APPERED=30000" >> $GITHUB_ENV
+          echo "POLL_INTERVAL_OTHERS_FINISHED=1000" >> $GITHUB_ENV
+
+      - name: Wait to be discovered
+        run: sleep $POLL_INTERVAL_NEW_RUN_APPERED
+
       - name: Wait other runs to finish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          POLL_INTERVAL: ${{ env.POLL_INTERVAL_OTHERS_FINISHED }}
         run: |
           node ./poll-and-exit-on-other-run-finish.js
 
       - name: Run bot
         env:
-          TIMEOUT: 1h
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          POLL_INTERVAL: ${{ env.POLL_INTERVAL_NEW_RUN_APPERED }}
         run: |
           ./node_modules/.bin/concurrently --kill-others --success first  "node ./poll-and-exit-on-new-run-apper" "node ./index.js"
