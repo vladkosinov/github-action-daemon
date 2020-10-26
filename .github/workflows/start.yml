@@ -34,7 +34,7 @@ jobs:
           echo "POLL_INTERVAL_OTHERS_FINISHED=1000" >> $GITHUB_ENV
 
       - name: Wait to be discovered
-        run: sleep $POLL_INTERVAL_NEW_RUN_APPERED
+        run: sleep $(($POLL_INTERVAL_NEW_RUN_APPERED / 1000))
 
       - name: Wait other runs to finish
         env:
