@@ -15,7 +15,7 @@ jobs:
         id: npm-cache
         with:
           path: .github/workflows/demo/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('./package-lock.json') }}
 
       - name: Install Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
