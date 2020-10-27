@@ -1,4 +1,4 @@
-name: Run telegram bot
+name: Create a release
 on:
   push:
     branches:
