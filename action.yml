@@ -1,0 +1,16 @@
+name: GitHub Script
+description: Run demons using GitHub Actions
+branding:
+  color: blue
+  icon: code
+inputs:
+  command:
+    description: The command to run as a demon
+    required: true
+  github-token:
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
+    required: true
+runs:
+  using: node12
+  main: dist/index.js

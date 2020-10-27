@@ -1,0 +1,27 @@
+name: Run telegram bot
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    name: Create release
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: .github/workflows/demo/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('.github/workflows/demo/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Semantic release
+        run: ./node_modules/.bin/semantic-release
+
+      
