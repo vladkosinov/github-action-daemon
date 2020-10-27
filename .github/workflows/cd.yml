@@ -18,7 +18,6 @@ jobs:
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('./package-lock.json') }}
 
       - name: Install Dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Semantic release
