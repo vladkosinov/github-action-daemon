@@ -2,7 +2,7 @@ name: Run telegram bot
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: "0 */4 * * *"
   repository_dispatch:
