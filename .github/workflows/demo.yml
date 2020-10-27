@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.npm-cache-demo.outputs.cache-hit != 'true'
-        run: npm ci --prod
+        run: cd .github/workflows/demo/ && npm ci --prod
 
       - uses: ./
         env:
