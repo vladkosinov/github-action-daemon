@@ -1,7 +1,7 @@
 {
   "name": "github-action-runner",
   "scripts": {
-    "publish": "ncc build src/index.js --license licenses.txt"
+    "postversion": "ncc build src/index.js --license licenses.txt"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
