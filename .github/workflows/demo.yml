@@ -1,4 +1,4 @@
-name: Run telegram bot
+name: Daemon demo
 on:
   push:
     branches:
