@@ -11,8 +11,6 @@ Runs a given `command` and handles its restarts:
 
 **Required** The command to run
 
-## Outputs
-
 ### `github-token` [optional]
 
 Used to poll GitHub API for statuses of the same workflow that running the daeomn. Default: `${{ github.token }}`
