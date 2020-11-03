@@ -20,7 +20,7 @@ Used to poll GitHub API for statuses of the same workflow that running the daeom
 
 ## Motivation
 
-I wonder
+To test services manually or run live repo examples
 
 ## Example usage
 
