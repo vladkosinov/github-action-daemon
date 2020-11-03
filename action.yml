@@ -1,4 +1,4 @@
-name: GitHub Script
+name: Github Action Daemon
 description: Run demons using GitHub Actions
 branding:
   color: blue
