@@ -13,7 +13,9 @@ Runs a given `command` and handles its restarts:
 
 ### `github-token` [optional]
 
-Used to poll GitHub API for statuses of the same workflow that running the daeomn. Default: `${{ github.token }}`
+Used to poll GitHub API for statuses of the same workflow that running the daeomn. 
+
+Default: `${{ github.token }}`
 
 
 ## Motivation
