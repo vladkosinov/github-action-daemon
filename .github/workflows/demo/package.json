@@ -1,6 +1,0 @@
-{
-  "name": "github-actions-runner-demo",
-  "dependencies": {
-    "telegraf": "^3.38.0"
-  }
-}
