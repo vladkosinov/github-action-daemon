@@ -1,5 +1,17 @@
 # github-action-daemon
 
+## Disclaimer ⚠️⚠️⚠️
+
+
+Running a daemon as a server and accessing it from outside the VM is not within the terms of use for Actions. 
+
+This package just a demonstration of an easy way of running applications using GitHub Actions and not intended to be used by anyone.
+
+Please don't do this.
+
+
+## Description
+
 Runs a given `command` and handles its restarts:
 
 - waits for the finish of all other runs of the same workflow before starting the command
